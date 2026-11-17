@@ -5,6 +5,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-
+int ft_print_char(char *c);
 
 #endif

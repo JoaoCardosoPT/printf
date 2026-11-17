@@ -1,11 +1,6 @@
-int ft_print_char(const char *str)
-{
-    int i;
+#include "ft_printf.h"
 
-    while(str[i] != '\0')
-    {
-        write(1, &str[i], 1);
-        i++;
-    }
-    return (0);
+int ft_print_char(char *c)
+{
+    return (write(1, &c, 1));
 }
