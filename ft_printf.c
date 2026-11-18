@@ -29,7 +29,7 @@ static int	ft_print_format(const char *str, va_list *args)
 		}
 		else
 			written = ft_print_char(*str);
-		if (written < 0 || count > INT_MAX - written)
+		if (written < 0 || count > 2147483647 - written)
 			return (-1);
 		count += written;
 		str++;

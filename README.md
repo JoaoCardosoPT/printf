@@ -122,41 +122,26 @@ Decimal integers are converted using division and modulo operations.
 - `/ 10` removes the last decimal digit.
 - Negative numbers require printing a minus sign.
 
-Recursion can be used to print the digits in the correct order.
+The function recurses on the quotient before printing the remainder, so the
+digits appear in order from most significant to least significant.
 
 ### 4. Hexadecimal Conversion
 
-Hexadecimal numbers use base 16.
+The hexadecimal helper uses division and modulo in base 16. If the number is
+at least 16, it first recurses on `num / 16` to print the higher digits. It
+then uses `num % 16` as an index into the digit string to print the final
+digit. Values below 16, including zero, need only one digit.
 
-A character array maps values from 0 to 15 to hexadecimal digits:
-
-```c
-char *hex_chars = "0123456789abcdef";
-```
-
-The expression:
-
-```c
-hex_chars[num & 0xF]
-```
-
-extracts the lowest four bits of the number and converts them into the corresponding hexadecimal character.
-
-The operation:
-
-```c
-num >>= 4;
-```
-
-shifts the number four bits to the right, allowing the next hexadecimal digit to be processed.
-
-This approach is efficient because hexadecimal digits directly correspond to groups of four bits.
+The helper takes the digit string as a parameter, so lowercase and uppercase
+conversions share the same algorithm. Recursion prints the digits in order
+without allocating a temporary buffer.
 
 ### 5. Pointer Conversion
 
 Pointer addresses are converted into an unsigned integer type capable of representing an address.
 
-The resulting value is printed in hexadecimal, usually with a `0x` prefix.
+Non-null pointers are printed with a `0x` prefix using the lowercase
+hexadecimal helper. Null pointers are printed as `(nil)`.
 
 This prevents address truncation that could occur when using a regular `unsigned int`.
 
@@ -185,7 +170,7 @@ The main function propagates write errors and returns `-1` when necessary.
 - [printf — Linux Manual](https://man7.org/linux/man-pages/man3/printf.3.html)
 - [Variadic Arguments — cppreference](https://en.cppreference.com/w/c/variadic.html)
 - [write — Linux Manual](https://man7.org/linux/man-pages/man2/write.2.html)
-- [Bitwise Operators — cppreference](https://en.cppreference.com/w/c/language/operator_arithmetic.html)
+- [Arithmetic Operators — cppreference](https://en.cppreference.com/w/c/language/operator_arithmetic.html)
 
 ### AI Usage
 
@@ -199,5 +184,7 @@ Specifically, it was used to:
 - Clarify pointer representation and argument types.
 - Review implementation ideas and explain potential errors.
 - Assist with README documentation.
+- Review the mandatory requirements, compare output with the system `printf`,
+  and update the algorithm description to match the implementation.
 
 The implementation and programming decisions were developed and reviewed by the author.

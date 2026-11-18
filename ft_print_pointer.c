@@ -17,10 +17,10 @@ int	ft_print_ptr(void *ptr)
 	int	count;
 
 	if (!ptr)
-		return (ft_print_string(FT_NULL_PTR));
+		return (ft_print_string("(nil)"));
 	if (ft_print_string("0x") < 0)
 		return (-1);
-	count = ft_print_hex((uintptr_t)ptr);
+	count = ft_print_hex((size_t)ptr);
 	if (count < 0)
 		return (-1);
 	return (count + 2);

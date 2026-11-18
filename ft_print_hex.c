@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_put_hex(uintptr_t num, const char *base)
+static int	ft_put_hex(size_t num, const char *base)
 {
 	int	count;
 
@@ -28,7 +28,7 @@ static int	ft_put_hex(uintptr_t num, const char *base)
 	return (count + 1);
 }
 
-int	ft_print_hex(uintptr_t num)
+int	ft_print_hex(size_t num)
 {
 	return (ft_put_hex(num, "0123456789abcdef"));
 }
