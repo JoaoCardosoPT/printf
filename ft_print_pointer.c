@@ -10,7 +10,7 @@ void put_hex(int n)
     write(1, &base[n % 16], 1);
 }
 
-int print_ptr(void *ptr)
+int ft_print_ptr(void *ptr)
 {
     int addr;
 
