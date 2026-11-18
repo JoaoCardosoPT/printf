@@ -1,35 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_number.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joacarva <joacarva@c2r3s4.42porto.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/18 18:25:00 by joacarva          #+#    #+#             */
+/*   Updated: 2026/11/18 18:25:00 by joacarva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int ft_print_nbr(int n)
+int	ft_print_unsigned(unsigned int n)
 {
-    int count;
-    long num;
-    char c;
+	int	count;
 
-    num = n;
-    count = 0;
-    if (num < 0)
-    {
-       write(1, "-", 1);
-       count++;
-       num = -num;
-    }
-
-    if (n >= 10)
-        count += ft_print_nbr(num / 10); 
-    
-    c = (num % 10) + '0';
-    count += write(1, &c, 1);
-    return (count);
+	count = 0;
+	if (n >= 10)
+	{
+		count = ft_print_unsigned(n / 10);
+		if (count < 0)
+			return (-1);
+	}
+	if (ft_print_char((n % 10) + '0') < 0)
+		return (-1);
+	return (count + 1);
 }
 
-int ft_print_unsinged(unsigned int n)
+int	ft_print_nbr(int n)
 {
-    int count;
+	unsigned int	num;
+	int				count;
+	int				written;
 
-    count = 0;
-    if (n >= 10)
-        count += ft_print_unsinged(n / 10);
-    count += ft_print_char((n % 10) + '0');
-    return (count);
+	num = (unsigned int)n;
+	count = 0;
+	if (n < 0)
+	{
+		if (ft_print_char('-') < 0)
+			return (-1);
+		count = 1;
+		num = 0 - num;
+	}
+	written = ft_print_unsigned(num);
+	if (written < 0)
+		return (-1);
+	return (count + written);
 }
